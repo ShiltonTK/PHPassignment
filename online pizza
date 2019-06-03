@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<title>Online Pizza</title>
+</head>
+<body>
+	<nav class="navbar fixed-top navbar-light bg-light">
+  <a class="navbar-brand" href="http://localhost/php_basics/pizza.html">Dashboard Orders</a>
+  <span class="navbar-text">Titus Tunduny
+  </span>
+  <form class="form-inline">
+    <a href="http://localhost/php_basics/login.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Logout</a>
+  </form>
+</nav>
+<br/><br/><br/>
+<div>
+	<h2>Quantity</h2>
+	<input type="number" name="large pizza"/>
+	<label for ="large pizza">Large Pizza (ksh. 1000)</label><br/>
+	<input type="number" name="medium pizza"/>
+	<label for ="medium pizza">Medium Pizza (ksh. 700)</label><br/>
+	<input type="number" name="small pizza"/>
+	<label for ="small pizza">Small Pizza (ksh. 300)</label><br/>
+
+</div>
+<br/><br/><br/>
+<div>
+	<h2>Extra Toppings</h2>
+	<input type="radio" name="meat toppings"/>
+	<label for ="meat toppings">Meat Toppings (ksh. 150)</label><br/>
+	<input type="radio" name="vegetable toppings"/>
+	<label for ="vegetable toppings">Vegetable Toppings (ksh. 100)</label><br/>
+	<input type="radio" checked="true" name="no  toppings"/>
+	<label for ="no toppings">No Toppings (ksh. 0)</label><br/>
+	<br/><br/>
+	<p>Feed a hungry child today?</p>
+	<input type="checkbox" name="donate"/>
+	<label for="donate">Donate ksh. 200</label>
+
+	<br/><br/>
+	<a href="#" class="btn btn-primary btn-lg active" role="submit" aria-pressed="true">ORDER NOW</a>
+</div>
+
+
+</body>
+</html>
