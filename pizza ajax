@@ -1,0 +1,155 @@
+<?php
+session_start();
+//$usernames = $_SESSION['pizzaorderer'];
+if(isset($_POST['submit'])){
+  $toptype = "";
+  $largePizza = htmlentities($_POST['largePizza']);
+  $mediumPizza = htmlentities($_POST['mediumPizza']);
+  $smallPizza = htmlentities($_POST['smallPizza']);
+$d=0;
+  $toppings = htmlentities($_POST['top']);
+  $donate = htmlentities($_POST['donate']);
+$pizzatotal = ($largePizza * 1000) + ($mediumPizza * 700) + ($smallPizza * 400);
+
+$pizzas = $largePizza + $mediumPizza + $smallPizza;
+if ($_POST['donate'] == 'donate') {
+  $donamount = "Thanks for donating KSH200!";
+  $d=200;
+}
+if ($toppings=="meat") {
+  $topamount = $pizzas * 150;
+  $toptype = "Meat";
+}
+
+if ($toppings=="veg") {
+  $topamount = $pizzas * 100;
+  $toptype = "Vegetable";
+}
+
+if ($toppings=="notop") {
+  $topamount = 0;
+  $toptype = "No";
+}
+$absoluttotal = $pizzatotal + $d + $topamount;
+
+$_SESSION['largequantity']=$largePizza;
+$_SESSION['mediumquantity']=$mediumPizza;
+$_SESSION['smallquantity']=$smallPizza;
+$_SESSION['toppings']=$pizzas;
+$_SESSION['topamount']=$topamount;
+$_SESSION['donation']= $donamount;
+$_SESSION['pizatotals']=$pizzatotal;
+$_SESSION['toptype']=$toptype;
+$_SESSION['totalabs']=$absoluttotal;
+
+
+  header('Location: order.php');
+}
+ ?>
+<html>
+<head>
+<link href="./style.css"  rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="jquery-3.4.1.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="http://localhost/pizza/spizzaz.php">PIZZERIA</a>
+  <div class="container">
+      <h6 style="color: orange; font-size: 20px;">online order services</h6>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="btn btn-outline-danger" role="button" href="../login.php">Sign Out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br/><br/>
+<div class="orderForm" style="">
+<h2 name="head" style="color: red">Quantity</h2>
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<div class='row'  style="padding-left:40px;">
+ <input type="number" maxlength="2" size="2" placeholder="0" name="largePizza" id="largePizza">
+<label for="largePizza" style="padding-left: 10px; font-size: 20px;"> Large Pizza (Ksh 1000)</label>
+</div> <br>
+<div class='row'  style="padding-left:40px;">
+<input type="number" maxlength="2" size="2" placeholder="0" name="mediumPizza" id="mediumPizza">
+<label for="mediumPizza" style="padding-left: 10px; font-size: 20px;">Medium Pizza (Ksh 700)</label>
+</div> <br>
+<div class='row'  style="padding-left:40px;">
+<input type="number" maxlength="2" size="2" required placeholder="0" name="smallPizza" id="smallPizza">
+<label for="smallPizza" style="padding-left: 10px; font-size: 20px;"> Small Pizza (Ksh 400)</label>
+</div> <br>
+
+<h2 name="xtra" style="color: red">Extra Toppings</h2>
+<br>
+<div class="row"  style="padding-left:40px;">
+	<input type="radio"  name="top" value="meat"> Meat Toppings(Ksh 150)<br>
+</div>
+<br>
+<div class="row"  style="padding-left:40px;">
+    <input type="radio"  name="top" value="veg">Vegetable Toppings (Ksh 100) <br>
+</div>
+<br>
+<div class="row"  style="padding-left:40px;">
+	<input type="radio"  name="top" value="notop" checked> No Toppings (Ksh 0)
+</div>
+<br><br>
+<div class="row"  style="padding-left:40px;">
+<h5 name="feed">Feed a Hungry Child Today?</h5>
+</div>
+<div class="row"  style="padding-left:40px;">
+<input  type="checkbox" id="donate" name="donate" value="donate">Donate Ksh 200<br>
+</div>
+<br>
+<div class="row"  style="padding-left:40px;">
+<input type="submit" name="submit" id="submit" value="ORDER NOW" class="btn btn-outline-danger" name="submit" role="submit" aria-pressed="true"></a>
+</div>
+</div>
+</form>
+<script>
+  $(document).ready(function(){
+    $("#submit").on('click', function(e){
+      e.preventDefault();
+
+      var largePizza = $("#largePizza").val();
+      var mediumPizza = $("#mediumPizza").val();
+      var smallPizza = $("#smallPizza").val();
+
+      var top = $("input[name='top']:checked").val();
+      var donate = $("input[name='donate']:checked").val()
+
+      var donation = 0;
+      if (donate == "donate") {
+        donation = 200;
+      }
+
+      if(largePizza==""||mediumPizza==""||smallPizza==""){
+        alert("fill in all values");
+        return false;
+      }
+
+      alert(largePizza);
+      alert(mediumPizza);
+      alert(smallPizza);
+      alert(top);
+      alert(donation);
+
+      $.post("order.php",
+      {
+        largePizza:largePizza,
+        mediumPizza:mediumPizza,
+        smallPizza:smallPizza,
+        top:top,
+        donation:donation
+
+      },function(result){alert(result);}
+      );
+
+    });
+  });
+</script>
+</body>
+</html>
